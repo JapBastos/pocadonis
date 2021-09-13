@@ -1,0 +1,112 @@
+paths:
+  /users:
+    get:
+      tags:
+        - 'User'
+      summary: 'List all users'
+      description: 'List all users'
+      responses:
+        '200':
+          description: 'successful operation'
+
+    post:
+      tags:
+        - User
+      summary: Add a new  user
+      requestBody:
+        description: Profile object that needs to be added
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+        405:
+          description: Invalid input
+        500:
+          description: Erro interno
+      x-codegen-request-body-name: body
+
+    put:
+      tags:
+        - 'User'
+      summary: 'Update profile'
+      description: ''
+      operationId: 'updateProfile'
+      parameters:
+        - name: 'userId'
+          in: 'path'
+          type: 'integer'
+          required: true
+      requestBody:
+        description: 'Profile object that needs to be added'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      x-codegen-request-body-name: body
+      responses:
+        '200':
+          description: 'Success'
+        '401':
+          description: 'UnUserorized'
+        '405':
+          description: 'Invalid input'
+
+    delete:
+      tags:
+        - User
+      summary: 'Delete profile'
+      description: ''
+      parameters:
+        - name: userId
+          in: path
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: 'Success'
+        '401':
+          description: 'Unauthorized'
+        '405':
+          description: 'Invalid input'
+
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        created_at:
+          type: timestamp
+        updated_at:
+          type: timestamp
+      required:
+        - name
+        - email
+        - password

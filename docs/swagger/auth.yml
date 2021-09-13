@@ -1,0 +1,106 @@
+paths:
+  /login:
+    post:
+      tags:
+        - Pops
+      summary: Add a new profile to the company
+      operationId: login
+      requestBody:
+        description: Profile object that needs to be added
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+          content: {}
+        405:
+          description: Invalid input
+          content: {}
+      x-codegen-request-body-name: body
+
+  /auth/logout:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Logout'
+      security:
+        - Bearer: []
+      description: 'Logout'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'successful operation'
+
+  /auth/register:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Register'
+      description: 'Register'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'successful operation'
+
+  /auth/reset-password:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Reset Password'
+      security:
+        - Bearer: []
+      description: 'Reset Password'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'successful operation'
+
+  /auth/resend-password:
+    post:
+      tags:
+        - 'Auth'
+      summary: 'Resend Password'
+      description: 'Resend Password'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'successful operation'
+
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: OAT
+  schemas:
+    Auth:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
